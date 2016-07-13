@@ -25,7 +25,7 @@ public class Exposer {
         this.seckillId = seckillId;
     }
 
-    public Exposer( boolean exposed, long seckillId, long start, long end, long now) {
+    public Exposer(boolean exposed, long seckillId, long start, long end, long now) {
         this.start = start;
         this.seckillId = seckillId;
         this.end = end;
@@ -84,5 +84,10 @@ public class Exposer {
 
     public void setEnd(long end) {
         this.end = end;
+    }
+
+    @Override
+    public String toString() {
+        return "Exposer{exposed =" + exposed + ",md5=" + md5 + ",seckillId=" + seckillId + ",now=" + now + ",start=" + start + ",end=" + end + "}";
     }
 }
