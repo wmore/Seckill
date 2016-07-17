@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.channels.ClosedSelectorException;
@@ -32,11 +33,20 @@ public class SeckillController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(Model model) {
+
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    public String hello(Model model) {
+        model.addAttribute("name", "wangyue");
+        return "hello";
+    }
+
+    @RequestMapping(value = "list", method = RequestMethod.GET)
+    public String list(ModelMap model) {
 
         List<Seckill> seckillList = seckillService.getSeckillList();
-        model.addAttribute("seckillList", seckillList);
+        if (model == null)
+            logger.error("model is null !!!!! fuck!!!!!");
+        model.put("seckillList", seckillList);
         return "list";
     }
 
@@ -100,7 +110,8 @@ public class SeckillController {
         return result;
     }
 
-    @RequestMapping(value = "/time/now", method = RequestMethod.GET)
+    @RequestMapping(value = "/time/now", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
     public SeckillResult<Long> time() {
         Date now = new Date();
         return new SeckillResult<Long>(true, now.getTime());

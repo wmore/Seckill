@@ -122,7 +122,6 @@
             <artifactId>spring-webmvc</artifactId>
             <version>4.3.0.RELEASE</version>
         </dependency>
-
         <!--spring test-->
         <dependency>
             <groupId>org.springframework</groupId>
